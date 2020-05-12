@@ -8,7 +8,7 @@ def accept_incoming_connections():
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
-        client.send(bytes("Greetings from the chatroom! enjoy your time!", "utf8"))
+        client.send(bytes("<system> Greetings from the chatroom! enjoy your time!", "utf8"))
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start()
 
@@ -19,8 +19,8 @@ def handle_client(client):  # Takes client socket as argument.
     name = client.recv(BUFSIZ).decode("utf8")
     # welcome = 'Welcome %s! Now you can chat with others.' % name
     # client.send(bytes(welcome, "utf8"))
-    msg = "%s has joined the chat!" % name
-    broadcast(bytes(msg, "utf8"), client, flag=False)
+    msg = "<system> %s has joined the chat!" % name
+    broadcast(bytes(msg, "utf8"), client)
     clients[client] = name
 
     while True:
