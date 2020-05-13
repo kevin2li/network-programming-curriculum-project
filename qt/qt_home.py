@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'home.ui'
+# Form implementation generated from reading ui file 'qt\home.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -133,18 +133,9 @@ class Ui_mainWindow(object):
         self.label_24.setAlignment(QtCore.Qt.AlignCenter)
         self.label_24.setObjectName("label_24")
         self.verticalLayout_6.addWidget(self.label_24)
-        self.label_22 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_22.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.label_22.setText("")
-        self.label_22.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_22.setObjectName("label_22")
-        self.verticalLayout_6.addWidget(self.label_22)
-        self.label_23 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_23.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.label_23.setText("")
-        self.label_23.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_23.setObjectName("label_23")
-        self.verticalLayout_6.addWidget(self.label_23)
+        self.pushButton_6 = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.verticalLayout_6.addWidget(self.pushButton_6)
         self.gridLayout.addLayout(self.verticalLayout_6, 1, 2, 1, 1)
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(250, 40, 441, 25))
@@ -168,6 +159,7 @@ class Ui_mainWindow(object):
         self.pushButton_3.clicked.connect(mainWindow.enter)
         self.pushButton_4.clicked.connect(mainWindow.enter)
         self.pushButton_5.clicked.connect(mainWindow.enter)
+        self.pushButton_6.clicked.connect(mainWindow.chatbot)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
     def retranslateUi(self, mainWindow):
@@ -194,5 +186,6 @@ class Ui_mainWindow(object):
         self.label_20.setText(_translate("mainWindow", "在线人数：3人"))
         self.pushButton_3.setText(_translate("mainWindow", "进入"))
         self.label_21.setText(_translate("mainWindow", "TextLabel"))
-        self.label_24.setText(_translate("mainWindow", "敬请期待"))
+        self.label_24.setText(_translate("mainWindow", "与机器人聊天"))
+        self.pushButton_6.setText(_translate("mainWindow", "进入"))
         self.label_7.setText(_translate("mainWindow", "请选择你感兴趣的聊天室："))

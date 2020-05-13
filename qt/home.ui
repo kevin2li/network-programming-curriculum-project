@@ -328,7 +328,7 @@
           </size>
          </property>
          <property name="text">
-          <string>敬请期待</string>
+          <string>与机器人聊天</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -336,34 +336,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_22">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>20</height>
-          </size>
-         </property>
+        <widget class="QPushButton" name="pushButton_6">
          <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_23">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <string>进入</string>
          </property>
         </widget>
        </item>
@@ -487,8 +462,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>mainWindow</receiver>
+   <slot>chatbot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>762</x>
+     <y>712</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>785</x>
+     <y>742</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>enter()</slot>
+  <slot>chatbot()</slot>
  </slots>
 </ui>
