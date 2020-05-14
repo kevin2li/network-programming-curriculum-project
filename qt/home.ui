@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>922</width>
-    <height>786</height>
+    <width>958</width>
+    <height>822</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -367,13 +367,26 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_7">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>720</y>
+      <width>130</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>个人中心</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>922</width>
+     <width>958</width>
      <height>26</height>
     </rect>
    </property>
@@ -478,9 +491,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>mainWindow</receiver>
+   <slot>config()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>812</x>
+     <y>769</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>912</x>
+     <y>745</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>enter()</slot>
   <slot>chatbot()</slot>
+  <slot>config()</slot>
  </slots>
 </ui>

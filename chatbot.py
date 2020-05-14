@@ -1,6 +1,5 @@
 import traceback
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 import sys
@@ -55,7 +54,6 @@ class Chatbot_Window(QMainWindow, Ui_MainWindow):
         item.setText(f"<Bot> {result}")
         self.listWidget.addItem(item)
         self.listWidget.scrollToBottom()
-
 
     def exit(self):
         reply = QMessageBox.question(self, '退出', '确定退出？', QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,

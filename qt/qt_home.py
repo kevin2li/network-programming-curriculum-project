@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
         mainWindow.setObjectName("mainWindow")
-        mainWindow.resize(922, 786)
+        mainWindow.resize(958, 822)
         self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -144,9 +144,12 @@ class Ui_mainWindow(object):
         self.label_7.setFont(font)
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName("label_7")
+        self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_7.setGeometry(QtCore.QRect(750, 720, 130, 41))
+        self.pushButton_7.setObjectName("pushButton_7")
         mainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(mainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 922, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 958, 26))
         self.menubar.setObjectName("menubar")
         mainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(mainWindow)
@@ -160,6 +163,7 @@ class Ui_mainWindow(object):
         self.pushButton_4.clicked.connect(mainWindow.enter)
         self.pushButton_5.clicked.connect(mainWindow.enter)
         self.pushButton_6.clicked.connect(mainWindow.chatbot)
+        self.pushButton_7.clicked.connect(mainWindow.config)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
     def retranslateUi(self, mainWindow):
@@ -189,3 +193,4 @@ class Ui_mainWindow(object):
         self.label_24.setText(_translate("mainWindow", "与机器人聊天"))
         self.pushButton_6.setText(_translate("mainWindow", "进入"))
         self.label_7.setText(_translate("mainWindow", "请选择你感兴趣的聊天室："))
+        self.pushButton_7.setText(_translate("mainWindow", "个人中心"))

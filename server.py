@@ -21,12 +21,8 @@ def accept_incoming_connections():
 def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
 
-    name = client.recv(BUFSIZ).decode("utf8")
+    name = client.recv(BUFSIZE).decode("utf8")
     clients[client] = name
-    # welcome = 'Welcome %s! Now you can chat with others.' % name
-    # client.send(bytes(welcome, "utf8"))
-
-    # msg = "<system> %s has joined the chat!" % name
     msg = Message("join", name, "system")
     broadcast(msg, client)
 
@@ -36,7 +32,7 @@ def handle_client(client):  # Takes client socket as argument.
     client.send(msg.serialize().encode(encoding="utf-8"))
 
     while True:
-        msg = client.recv(BUFSIZ).decode("utf-8")
+        msg = client.recv(BUFSIZE).decode("utf-8")
         print(msg)
         msg = Message.deserialize(msg)
         if msg.type != 'leave':
@@ -54,7 +50,7 @@ def handle_client(client):  # Takes client socket as argument.
             break
 
 
-def broadcast(msg, src):  # prefix is for name identification.
+def broadcast(msg, src):
     """Broadcasts a message to all the clients."""
     for client in clients:
         if client != src:
@@ -66,7 +62,7 @@ addresses = {}
 
 HOST = ''
 PORT = 33000
-BUFSIZ = 1024
+BUFSIZE = 1024
 ADDR = (HOST, PORT)
 
 SERVER = socket(AF_INET, SOCK_STREAM)

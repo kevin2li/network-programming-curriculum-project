@@ -1,5 +1,4 @@
 import json
-import socket
 import traceback
 
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -19,8 +18,6 @@ class Client_Window(QMainWindow, Ui_MainWindow):
         self.name = name
         self.IP = "127.0.0.1"
         self.PORT = 33000
-        # self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # self.server.connect((self.IP, self.PORT))
         self.server = server
 
         receive_thread = threading.Thread(target=self.receive)
@@ -29,7 +26,6 @@ class Client_Window(QMainWindow, Ui_MainWindow):
         self.lineEdit.setFocus()
         self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
         self.show()
-
 
     def send(self):
         try:
@@ -99,15 +95,11 @@ class Client_Window(QMainWindow, Ui_MainWindow):
         reply = QMessageBox.question(self, '退出', '确定退出？', QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                                      QMessageBox.Cancel)
         if reply == QMessageBox.Yes:
-            msg = Message("leave", "", self.name)
-            self.server.send(msg.serialize().encode(encoding="utf-8"))
-            self.server.shutdown(2)
-            self.server.close()
-            self.close()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    win = Client_Window("Kevin")
-    win.show()
-    sys.exit(app.exec_())
+            try:
+                msg = Message("leave", "", self.name)
+                self.server.send(msg.serialize().encode(encoding="utf-8"))
+                self.server.shutdown(2)
+                self.server.close()
+                self.close()
+            except:
+                traceback.print_exc()
