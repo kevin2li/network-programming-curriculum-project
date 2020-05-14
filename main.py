@@ -1,5 +1,7 @@
 import socket
 import traceback
+from threading import Thread
+
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QApplication, QInputDialog, QMessageBox, QLabel, QDialogButtonBox, QLineEdit, \
@@ -9,6 +11,8 @@ from chatbot import Chatbot_Window
 from client_gui import Client_Window
 from qt.qt_home import Ui_mainWindow
 import matplotlib.pyplot as plt
+
+from server import Server
 
 
 class InputDialog(QDialog):
@@ -44,8 +48,7 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         super(Main_Window, self).__init__()
         self.setupUi(self)
         self.IP = "127.0.0.1"
-        self.PORT = 33000
-        self.server = ""
+        self.PORT = 9000
         self.nickname = ""
         self.room = ""
         labels = [self.label_5, self.label_12, self.label_18, self.label_6, self.label_15, self.label_21]
@@ -68,7 +71,8 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         label.setMinimumSize(1, 1)
         label.show()
 
-    def enter(self):
+    def enter(self, sth="", ip="127.0.0.1", port=33000):
+        print(ip, port)
         if self.nickname == "":
             text, ok = QInputDialog.getText(self, '输入昵称', '请输入您的昵称：')
             if ok:
@@ -80,7 +84,7 @@ class Main_Window(QMainWindow, Ui_mainWindow):
                 return
         try:
             self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.server.connect((self.IP, self.PORT))
+            self.server.connect((ip, port))
         except:
             traceback.print_exc()
             QMessageBox.information(self, '提示', '无法连接服务器')
@@ -112,6 +116,33 @@ class Main_Window(QMainWindow, Ui_mainWindow):
                     self.IP, self.PORT, self.nickname = host, int(port), nickname
                 else:
                     QMessageBox.information(self, '提示', '信息不能为空！')
+        except:
+            traceback.print_exc()
+
+    def create_room(self):
+        print("create room")
+        try:
+            if self.IP and self.PORT and self.nickname:
+                self.myserver = Server(self.IP, self.PORT)
+                myserver_thread = Thread(target=self.myserver.establish)
+                myserver_thread.start()
+                self.enter("", self.IP, self.PORT)
+            else:
+                QMessageBox.information(self, '提示', '请前往个人中心完善信息！')
+        except:
+            traceback.print_exc()
+
+    def enter_room(self):
+        print("enter room")
+        try:
+            self.configDialog = InputDialog(self.IP, self.PORT, self.nickname)
+            if self.configDialog.exec_():
+                host, port, nickname = self.configDialog.getInputs()
+                if host and port and nickname:
+                    self.enter("", host, int(port))
+                else:
+                    QMessageBox.information(self, '提示', '信息不能为空！')
+
         except:
             traceback.print_exc()
 

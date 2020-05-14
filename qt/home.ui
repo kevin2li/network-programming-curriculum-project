@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>958</width>
-    <height>822</height>
+    <width>911</width>
+    <height>848</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -367,18 +367,71 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>720</y>
-      <width>130</width>
-      <height>41</height>
+      <x>460</x>
+      <y>710</y>
+      <width>421</width>
+      <height>81</height>
      </rect>
     </property>
-    <property name="text">
-     <string>个人中心</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>创建聊天室</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>加入聊天室</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>个人中心</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -386,7 +439,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>958</width>
+     <width>911</width>
      <height>26</height>
     </rect>
    </property>
@@ -507,10 +560,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>mainWindow</receiver>
+   <slot>create_room()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>773</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>772</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>mainWindow</receiver>
+   <slot>enter_room()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>655</x>
+     <y>782</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>688</x>
+     <y>803</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>enter()</slot>
   <slot>chatbot()</slot>
   <slot>config()</slot>
+  <slot>create_room()</slot>
+  <slot>enter_room()</slot>
  </slots>
 </ui>
