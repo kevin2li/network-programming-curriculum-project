@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
-    <height>684</height>
+    <width>913</width>
+    <height>797</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,95 +16,225 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3">
+      <property name="topMargin">
+       <number>0</number>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>400</height>
-          </size>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAsNeeded</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustIgnored</enum>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-         <item>
-          <property name="text">
-           <string>Welcome to this chatroom!☺</string>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <property name="topMargin">
+         <number>26</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>999999</width>
+            <height>20</height>
+           </size>
           </property>
           <property name="font">
            <font>
             <pointsize>12</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
            </font>
           </property>
-          <property name="textAlignment">
-           <set>AlignCenter</set>
+          <property name="text">
+           <string>房间成员列表</string>
           </property>
-          <property name="background">
-           <brush brushstyle="NoBrush">
-            <color alpha="255">
-             <red>0</red>
-             <green>0</green>
-             <blue>0</blue>
-            </color>
-           </brush>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
-          <property name="foreground">
-           <brush brushstyle="NoBrush">
-            <color alpha="255">
-             <red>0</red>
-             <green>0</green>
-             <blue>0</blue>
-            </color>
-           </brush>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listWidget_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>480</height>
+           </size>
           </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="placeholderText">
-          <string>请输入...</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>发送</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>退出</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
+          <property name="maximumSize">
+           <size>
+            <width>999999</width>
+            <height>9999999</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>44</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>离开房间</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>87</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="listWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>400</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <item>
+           <property name="text">
+            <string>Welcome to this chatroom!☺</string>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="textAlignment">
+            <set>AlignCenter</set>
+           </property>
+           <property name="background">
+            <brush brushstyle="NoBrush">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </property>
+           <property name="foreground">
+            <brush brushstyle="NoBrush">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLineEdit" name="lineEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="placeholderText">
+                <string>请输入...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>61</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>发送</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -113,7 +243,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>738</width>
+     <width>913</width>
      <height>26</height>
     </rect>
    </property>
@@ -129,8 +259,8 @@
    <slot>send()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>90</x>
-     <y>600</y>
+     <x>835</x>
+     <y>712</y>
     </hint>
     <hint type="destinationlabel">
      <x>701</x>
@@ -145,12 +275,28 @@
    <slot>exit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>623</y>
+     <x>231</x>
+     <y>636</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
      <y>658</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>send()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>707</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>565</x>
+     <y>764</y>
     </hint>
    </hints>
   </connection>

@@ -1,5 +1,7 @@
 import traceback
 from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 import sys
 from qt.qt_client import Ui_MainWindow
@@ -16,14 +18,16 @@ class Chatbot_Window(QMainWindow, Ui_MainWindow):
         self.name = name
         self.base_url = "http://api.qingyunke.com/api.php?key=free&appid=0&msg={}"
         self.headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Edg/81.0.416.72"}
-        self.textEdit.setFocus()
+        self.lineEdit.setFocus()
+        self.listWidget_2.addItem(self.name + "<You>")
+        self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
         self.show()
 
     def send(self):
         try:
-            message = self.textEdit.toPlainText()
-            self.textEdit.clear()
-            self.textEdit.setFocus()
+            message = self.lineEdit.text()
+            self.lineEdit.clear()
+            self.lineEdit.setFocus()
             # add Item
             item = QtWidgets.QListWidgetItem()
             item.setTextAlignment(QtCore.Qt.AlignRight)
@@ -51,6 +55,7 @@ class Chatbot_Window(QMainWindow, Ui_MainWindow):
         item.setText(f"<Bot> {result}")
         self.listWidget.addItem(item)
         self.listWidget.scrollToBottom()
+
 
     def exit(self):
         reply = QMessageBox.question(self, '退出', '确定退出？', QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,

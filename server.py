@@ -1,6 +1,8 @@
 """Server for multithreaded (asynchronous) chat application."""
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
+import json
+from message import Message
 
 
 def accept_incoming_connections():
@@ -8,7 +10,10 @@ def accept_incoming_connections():
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
-        client.send(bytes("<system> Greetings from the chatroom! enjoy your time!", "utf8"))
+        msg = Message("welcome", "Greetings from the chatroom! enjoy your time!", "system")
+
+        client.send(msg.serialize().encode(encoding="utf-8"))
+
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start()
 
@@ -17,34 +22,45 @@ def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
 
     name = client.recv(BUFSIZ).decode("utf8")
+    clients[client] = name
     # welcome = 'Welcome %s! Now you can chat with others.' % name
     # client.send(bytes(welcome, "utf8"))
-    msg = "<system> %s has joined the chat!" % name
-    broadcast(bytes(msg, "utf8"), client)
-    clients[client] = name
+
+    # msg = "<system> %s has joined the chat!" % name
+    msg = Message("join", name, "system")
+    broadcast(msg, client)
+
+    names = [k for k in clients.values()]
+    print(names)
+    msg = Message("member", str(names), "system")
+    client.send(msg.serialize().encode(encoding="utf-8"))
 
     while True:
-        msg = client.recv(BUFSIZ)
-        if msg != bytes("{quit}", "utf8"):
-            broadcast(msg, client, prefix=name+": ")
+        msg = client.recv(BUFSIZ).decode("utf-8")
+        print(msg)
+        msg = Message.deserialize(msg)
+        if msg.type != 'leave':
+            broadcast(msg, client)
         else:
-            client.send(bytes("{quit}", "utf8"))
-            client.close()
+            msg = Message("leave", name, "system")
+            broadcast(msg, client)
             del clients[client]
-            broadcast(bytes("%s has left the chat." % name, "utf8"), client)
+            client.close()
+
+            names = [k for k in clients.values()]
+            print(names)
+            msg = Message("member", str(names), "system")
+            broadcast(msg, "")
             break
 
 
-def broadcast(msg, conn, flag=True, prefix=""):  # prefix is for name identification.
+def broadcast(msg, src):  # prefix is for name identification.
     """Broadcasts a message to all the clients."""
-    if not flag:
-        conn.send(bytes(prefix, "utf8")+msg)
-    else:
-        for sock in clients:
-            if sock != conn:
-                sock.send(bytes(prefix, "utf8")+msg)
+    for client in clients:
+        if client != src:
+            client.send(msg.serialize().encode(encoding="utf-8"))
 
-        
+
 clients = {}
 addresses = {}
 

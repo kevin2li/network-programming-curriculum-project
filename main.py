@@ -2,6 +2,7 @@ import socket
 import traceback
 
 from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QApplication, QInputDialog, QMessageBox
 import sys
 
@@ -18,13 +19,13 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         self.name = ""
         self.IP = "127.0.0.1"
         self.PORT = 33000
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server = ""
         labels = [self.label_5, self.label_12, self.label_18, self.label_6, self.label_15, self.label_21]
-        imgs = ["images/study.jpg", "images/mood.jpg", "images/idea.jpg", "images/relax.jpg", "images/film.jpg", "images/chatbot.jpg"]
+        imgs = ["study.jpg", "mood.jpg", "idea.jpg", "relax.jpg", "film.jpg", "chatbot.jpg"]
 
         for label, imgs in zip(labels, imgs):
-            self.display_image(imgs, label)
-
+            self.display_image("images/"+imgs, label)
+        self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
         self.show()
 
     def display_image(self, path_to_img, label):
@@ -41,14 +42,14 @@ class Main_Window(QMainWindow, Ui_mainWindow):
 
     def enter(self):
         try:
-
             text, ok = QInputDialog.getText(self, '输入昵称', '请输入您的昵称：')
             if ok and text == "":
                 QMessageBox.information(self, '提示', '昵称不能为空！')
             else:
                 self.name = text
+                self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.server.connect((self.IP, self.PORT))
-                self.room = Client_Window(self.name)
+                self.room = Client_Window(self.name, self.server)
                 self.room.show()
         except:
             traceback.print_exc()
