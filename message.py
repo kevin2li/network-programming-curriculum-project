@@ -4,7 +4,6 @@ import json
 class Message(object):
     """
     @param:type:join,leave,msg
-
     """
 
     def __init__(self, type, content, sender):

@@ -128,7 +128,7 @@ class Main_Window(QMainWindow, Ui_mainWindow):
                 myserver_thread.start()
                 self.enter("", self.IP, self.PORT)
             else:
-                QMessageBox.information(self, '提示', '请前往个人中心完善信息！')
+                QMessageBox.information(self, '提示', '请前往"个人中心"完善信息！')
         except:
             traceback.print_exc()
 

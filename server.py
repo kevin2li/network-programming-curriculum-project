@@ -34,7 +34,6 @@ class Server:
 
     def handle_client(self, client):  # Takes client socket as argument.
         """Handles a single client connection."""
-
         name = client.recv(self.BUFSIZE).decode("utf8")
         self.clients[client] = name
         msg = Message("join", name, "system")
