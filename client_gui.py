@@ -2,11 +2,13 @@ import json
 import traceback
 
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 import threading
 import sys
 
+from DAO import MessageDAO
 from message import Message
 from qt.qt_client import Ui_MainWindow
 
@@ -25,12 +27,21 @@ class Client_Window(QMainWindow, Ui_MainWindow):
         self.server.send(self.name.encode(encoding="utf-8"))
         self.lineEdit.setFocus()
         self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
+        self.messageDAO = MessageDAO()
+        oImage = QImage("images/background2.jpg")
+        sImage = oImage.scaled(QSize(911, 911))
+        palette = QPalette()
+        palette.setBrush(10, QBrush(sImage))
+        self.setPalette(palette)
+        self.setFixedSize(self.width(),self.height())
         self.show()
 
     def send(self):
         try:
             text = self.lineEdit.text()
-            message = Message("msg", text, self.name).serialize()
+            message = Message("msg", text, self.name)
+            self.messageDAO.addMessage(message)
+            message = message.serialize()
             self.lineEdit.clear()
             self.lineEdit.setFocus()
             self.server.send(message.encode(encoding='utf-8', errors='strict'))
@@ -97,6 +108,7 @@ class Client_Window(QMainWindow, Ui_MainWindow):
         if reply == QMessageBox.Yes:
             try:
                 msg = Message("leave", "", self.name)
+                self.messageDAO.addMessage(msg)
                 self.server.send(msg.serialize().encode(encoding="utf-8"))
                 self.server.shutdown(2)
                 self.server.close()

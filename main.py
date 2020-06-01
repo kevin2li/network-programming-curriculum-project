@@ -2,8 +2,9 @@ import socket
 import traceback
 from threading import Thread
 
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import QIcon
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QMainWindow, QApplication, QInputDialog, QMessageBox, QLabel, QDialogButtonBox, QLineEdit, \
     QDialog, QFormLayout
 import sys
@@ -57,6 +58,12 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         for label, imgs in zip(labels, imgs):
             self.display_image("images/" + imgs, label)
         self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
+        oImage = QImage("images/background2.jpg")
+        sImage = oImage.scaled(QSize(911, 911))  # resize Image to widgets size
+        palette = QPalette()
+        palette.setBrush(10, QBrush(sImage))  # 10 = Windowrole
+        self.setPalette(palette)
+        self.setFixedSize(self.width(),self.height())
         self.show()
 
     def display_image(self, path_to_img, label):
@@ -70,6 +77,7 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         label.setScaledContents(True)
         label.setMinimumSize(1, 1)
         label.show()
+
 
     def enter(self, sth="", ip="127.0.0.1", port=33000):
         print(ip, port)
@@ -107,6 +115,7 @@ class Main_Window(QMainWindow, Ui_mainWindow):
         except:
             traceback.print_exc()
 
+
     def config(self):
         try:
             self.configDialog = InputDialog(self.IP, self.PORT, self.nickname)
@@ -142,7 +151,6 @@ class Main_Window(QMainWindow, Ui_mainWindow):
                     self.enter("", host, int(port))
                 else:
                     QMessageBox.information(self, '提示', '信息不能为空！')
-
         except:
             traceback.print_exc()
 

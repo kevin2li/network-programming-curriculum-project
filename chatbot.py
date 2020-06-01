@@ -1,6 +1,7 @@
 import traceback
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 import sys
 from qt.qt_client import Ui_MainWindow
@@ -20,6 +21,12 @@ class Chatbot_Window(QMainWindow, Ui_MainWindow):
         self.lineEdit.setFocus()
         self.listWidget_2.addItem(self.name + "<You>")
         self.setWindowIcon(QIcon('images/chatroom_icon.jpg'))
+        oImage = QImage("images/background.jpg")
+        sImage = oImage.scaled(QSize(911, 911))  # resize Image to widgets size
+        palette = QPalette()
+        palette.setBrush(10, QBrush(sImage))  # 10 = Windowrole
+        self.setPalette(palette)
+        self.setFixedSize(self.width(),self.height())
         self.show()
 
     def send(self):

@@ -1,6 +1,8 @@
 """Server for multithreaded (asynchronous) chat application."""
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
+
+from DAO import MessageDAO
 from message import Message
 
 
@@ -11,6 +13,7 @@ class Server:
         self.HOST = IP
         self.PORT = PORT
         self.BUFSIZE = 1024
+        self.messageDAO = MessageDAO()
 
     def establish(self):
         self.SERVER = socket(AF_INET, SOCK_STREAM)
@@ -28,6 +31,7 @@ class Server:
             client, client_address = self.SERVER.accept()
             print("%s:%s has connected." % client_address)
             msg = Message("welcome", "Greetings from the chatroom! enjoy your time!", "system")
+            self.messageDAO.addMessage(msg)
             client.send(msg.serialize().encode(encoding="utf-8"))
             self.addresses[client] = client_address
             Thread(target=self.handle_client, args=(client,)).start()
@@ -37,11 +41,13 @@ class Server:
         name = client.recv(self.BUFSIZE).decode("utf8")
         self.clients[client] = name
         msg = Message("join", name, "system")
+        self.messageDAO.addMessage(msg)
         self.broadcast(msg, client)
 
         names = [k for k in self.clients.values()]
         print(names)
         msg = Message("member", str(names), "system")
+        self.messageDAO.addMessage(msg)
         client.send(msg.serialize().encode(encoding="utf-8"))
 
         while True:
@@ -50,8 +56,10 @@ class Server:
             msg = Message.deserialize(msg)
             if msg.type != 'leave':
                 self.broadcast(msg, client)
+
             else:
                 msg = Message("leave", name, "system")
+                self.messageDAO.addMessage(msg)
                 self.broadcast(msg, client)
                 del self.clients[client]
                 client.close()
@@ -59,6 +67,7 @@ class Server:
                 names = [k for k in self.clients.values()]
                 print(names)
                 msg = Message("member", str(names), "system")
+                self.messageDAO.addMessage(msg)
                 self.broadcast(msg, "")
                 break
 
